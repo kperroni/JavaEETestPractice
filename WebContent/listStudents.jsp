@@ -9,6 +9,7 @@
 </head>
 <body>
 <a href="addStudent.html">Add new Student</a>
+<a href="searchStudent.html">Search for Student</a>
 <form action="UpdateStudent" method="post">
 <table>
     <tr>

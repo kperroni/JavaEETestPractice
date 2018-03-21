@@ -7,17 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="ListStudents">List Students</a>
 <form action="UpdateStudent" method="post">
-<input type="text" name="stdid" value="${selectedStudent.getStdid()}"/>
-<input type="text" name="firstName" value="${selectedStudent.getFirstName()}"/>
-<input type="text" name="lastName" value="${selectedStudent.getLastName()}"/>
-<input type="text" name="address" value="${selectedStudent.getAddress()}"/>
-<input type="text" name="city" value="${selectedStudent.getCity()}"/>
-<input type="text" name="postalCode" value="${selectedStudent.getPostalCode()}"/>
-<input type="text" name="email" value="${selectedStudent.getEmail()}"/>
-<input type="text" name="program" value="${selectedStudent.getProgram()}"/>
-<input type="submit" value="Update Student"/>
-<input type="submit" value="Delete Student"/>
+<input type="text" name="stdid_${student.getStdid()}" value="${student.getStdid()}"/>
+<input type="text" name="firstName_${student.getStdid()}" value="${student.getFirstName()}"/>
+<input type="text" name="lastName_${student.getStdid()}" value="${student.getLastName()}"/>
+<input type="text" name="address_${student.getStdid()}" value="${student.getAddress()}"/>
+<input type="text" name="city_${student.getStdid()}" value="${student.getCity()}"/>
+<input type="text" name="postalCode_${student.getStdid()}" value="${student.getPostalCode()}"/>
+<input type="text" name="email_${student.getStdid()}" value="${student.getEmail()}"/>
+<input type="text" name="program_${student.getStdid()}" value="${student.getProgram()}"/>
+<input type="submit" name="buttonUpdate_${student.getStdid()}" value="Update Student"/>
+<input type="submit" name="buttonDelete_${student.getStdid()}" value="Delete Student"/>
 </form>
 </body>
 </html>

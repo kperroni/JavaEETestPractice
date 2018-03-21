@@ -37,10 +37,10 @@ public class AddStudent extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int result = Student.insertStudent(request.getParameter("firstName"),
+		int result = Student.insertStudent(new Student(request.getParameter("firstName"),
 				request.getParameter("lastName"), request.getParameter("address"), 
 				request.getParameter("city"), request.getParameter("postalCode"),
-				request.getParameter("email"), request.getParameter("program"));
+				request.getParameter("email"), request.getParameter("program")));
 		
 		if(result == 1) {
 			System.out.println("Insertion successful");

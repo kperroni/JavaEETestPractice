@@ -41,6 +41,9 @@ public class Student {
 		this.email = email;
 		this.program = program;
 	}
+	public Student(int stdid) {
+		this.stdid = stdid;
+	}
 
 	public int getStdid() {
 		return this.stdid;
@@ -126,17 +129,21 @@ public class Student {
 		return null;
 	}
 	
-	public static Student getStudent(int stdid) {
+	public static Student getStudent(Student student) {
 		try {
-			Student student = null;
 			Connection db = DatabaseConnector.getConnection();
 			Statement statement = db.createStatement();
-		    String query = "SELECT * FROM " + tableName + " WHERE stdid =" + " '"+stdid+"' ";
+		    String query = "SELECT * FROM " + tableName + " WHERE stdid =" + " '"+student.getStdid()+"' ";
 		    ResultSet resultSet = statement.executeQuery(query);
 		    while(resultSet.next()) {
-		    	student = (new Student(resultSet.getInt("stdid"), resultSet.getString("firstName"),
-		    			resultSet.getString("lastName"), resultSet.getString("address"), resultSet.getString("city"),
-		    			resultSet.getString("postalCode"), resultSet.getString("email"), resultSet.getString("program")));
+		    	student.setStdid(resultSet.getInt("stdid"));
+		    	student.setFirstName(resultSet.getString("firstName"));
+		    	student.setLastName(resultSet.getString("lastName"));
+		    	student.setAddress(resultSet.getString("address"));
+		    	student.setCity(resultSet.getString("city"));
+		    	student.setPostalCode(resultSet.getString("postalCode"));
+		    	student.setEmail(resultSet.getString("email"));
+		    	student.setProgram(resultSet.getString("program"));		    	
 		    }
 		    db.close();
 		    return student;
@@ -146,8 +153,7 @@ public class Student {
 		return null;
 	}
 	
-	public static int insertStudent(String firstName, String lastName, 
-			String address, String city, String postalCode, String email, String program) {
+	public static int insertStudent(Student student) {
 		try {
 			Connection db = DatabaseConnector.getConnection();
 			Statement statement = db.createStatement();
@@ -155,13 +161,13 @@ public class Student {
 		    		+ "(firstName, lastName, address,"
 		    		+ " city, postalCode, email, program)"
 		    		+ " VALUES"
-		    		+ "("+ " '"+firstName+"' ,"
-		    		+ ""+ " '"+lastName+"' ,"
-		    		+ ""+ " '"+address+"' ,"
-		    		+ ""+ " '"+city+"' ,"
-		    		+ ""+ " '"+postalCode+"' ,"
-		    		+ ""+ " '"+email+"' ,"
-		    		+ ""+ " '"+program+"')";
+		    		+ "("+ " '"+student.getFirstName()+"' ,"
+		    		+ ""+ " '"+student.getLastName()+"' ,"
+		    		+ ""+ " '"+student.getAddress()+"' ,"
+		    		+ ""+ " '"+student.getCity()+"' ,"
+		    		+ ""+ " '"+student.getPostalCode()+"' ,"
+		    		+ ""+ " '"+student.getEmail()+"' ,"
+		    		+ ""+ " '"+student.getProgram()+"')";
 		    int result = statement.executeUpdate(query);
 		    db.close();
 		    return result;
@@ -171,12 +177,12 @@ public class Student {
 		return 0;
 	}
 	
-	public static int deleteStudent(int stdid) {
+	public static int deleteStudent(Student student) {
 		try {
 			Connection db = DatabaseConnector.getConnection();
 			Statement statement = db.createStatement();
 		    String query = "DELETE FROM " + tableName + 
-		    		" WHERE stdid =" + " '"+stdid+"' ";
+		    		" WHERE stdid =" + " '"+student.getStdid()+"' ";
 		    int result = statement.executeUpdate(query);
 		    db.close();
 		    return result;
@@ -186,20 +192,19 @@ public class Student {
 		return 0;
 	}
 	
-	public static int updateStudent(int stdid, String firstName, String lastName, 
-			String address, String city, String postalCode, String email, String program) {
+	public static int updateStudent(Student student) {
 		try {
 			Connection db = DatabaseConnector.getConnection();
 			Statement statement = db.createStatement();
 		    String query = "UPDATE " + tableName + " SET "
-		    		+ "firstName ="+ " '"+firstName+"' ,"
-		    		+ "lastName ="+ " '"+lastName+"' ,"
-		    		+ "address ="+ " '"+address+"' ,"
-		    		+ "city ="+ " '"+city+"' ,"
-		    		+ "postalCode ="+ " '"+postalCode+"' ,"
-		    		+ "email ="+ " '"+email+"' ,"
-		    		+ "program ="+ " '"+program+"' "
-		    		+ " WHERE stdid =" + " '"+stdid+"' ";
+		    		+ "firstName ="+ " '"+student.getFirstName()+"' ,"
+		    		+ "lastName ="+ " '"+student.getLastName()+"' ,"
+		    		+ "address ="+ " '"+student.getAddress()+"' ,"
+		    		+ "city ="+ " '"+student.getCity()+"' ,"
+		    		+ "postalCode ="+ " '"+student.getPostalCode()+"' ,"
+		    		+ "email ="+ " '"+student.getEmail()+"' ,"
+		    		+ "program ="+ " '"+student.getProgram()+"' "
+		    		+ " WHERE stdid =" + " '"+student.getStdid()+"' ";
 		    int result = statement.executeUpdate(query);
 		    db.close();
 		    return result;

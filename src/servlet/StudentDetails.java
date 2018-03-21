@@ -29,7 +29,7 @@ public class StudentDetails extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setAttribute("selectedStudent", Student.getStudent(Integer.parseInt((String)request.getParameter("stdid"))));
+		request.setAttribute("student", Student.getStudent(new Student(Integer.parseInt((String)request.getParameter("stdid")))));
 		request.getRequestDispatcher("studentDetails.jsp").forward(request, response);
 	}
 

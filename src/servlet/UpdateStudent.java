@@ -43,15 +43,15 @@ public class UpdateStudent extends HttpServlet {
 		for (Student student : students) {
 			if(request.getParameter("buttonUpdate_"+student.getStdid()) != null) {
 				// Update Student
-				int result = Student.updateStudent(
-						Integer.parseInt(request.getParameter("stdid_"+student.getStdid())),
+				int result = Student.updateStudent(new Student
+						(Integer.parseInt(request.getParameter("stdid_"+student.getStdid())),
 						request.getParameter("firstName_"+student.getStdid()),
 						request.getParameter("lastName_"+student.getStdid()),
 						request.getParameter("address_"+student.getStdid()),
 						request.getParameter("city_"+student.getStdid()),
 						request.getParameter("postalCode_"+student.getStdid()),
 						request.getParameter("email_"+student.getStdid()),
-						request.getParameter("program_"+student.getStdid()));
+						request.getParameter("program_"+student.getStdid())));
 				if(result == 1) {
 					System.out.println("Update Successful");
 					response.sendRedirect("ListStudents");
@@ -64,7 +64,7 @@ public class UpdateStudent extends HttpServlet {
 			}
 			if(request.getParameter("buttonDelete_"+student.getStdid()) != null) {
 				// Delete Student
-				int result = Student.deleteStudent(Integer.parseInt(request.getParameter("stdid_"+student.getStdid())));
+				int result = Student.deleteStudent(new Student(Integer.parseInt(request.getParameter("stdid_"+student.getStdid()))));
 				
 				if(result == 1) {
 					System.out.println("Delete Successful");
